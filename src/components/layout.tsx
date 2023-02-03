@@ -1,15 +1,19 @@
 import Navbar from "@/components/navbar"
 import Table from "@/pages/Table"
+import Home from "@/pages/Home"
 import Index from "@/pages/Index"
 import Dashboard from "@/pages/Dashboard"
 import Page404 from "@/pages/404"
 import Login from "@/pages/Login"
 import Register from "@/pages/Register"
-import Logout from "@/pages/Logout"
+import Account from "@/pages/Account"
+import Search from "@/pages/Search"
 
 import { Route, Switch } from "wouter"
 import { useAtom } from 'jotai'
 import { userAtom } from "@/state/atoms"
+
+// Documentation used: https://github.com/molefrog/wouter
 
 const Layout = () => {
   const [user, _] = useAtom(userAtom)
@@ -19,7 +23,11 @@ const Layout = () => {
   )
 
   const loggedOut = (page: any) => (
-    user.token ? Index : page
+    user.token ? Home : page
+  )
+
+  const loggedIn = (loggedIn: any, loggedOut: any) => (
+    user.token ? loggedIn : loggedOut
   )
 
   return (
@@ -27,14 +35,15 @@ const Layout = () => {
       <Navbar className="sticky top-0 flex flex-col p-10 bg-slate-700 space-y-4 font-semibold w-40" />
       <div className="p-5 flex flex-col text-white w-full items-center justify-center">
         <Switch>
-          <Route path="/" component={Index} />
+          <Route path="/" component={loggedIn(Home, Index)} />
           <Route path="/login" component={loggedOut(Login)} />
-          <Route path="/logout" component={protectedPage(Logout)} />
+          <Route path="/account" component={protectedPage(Account)} />
           <Route path="/register" component={loggedOut(Register)} />
           <Route path="/dashboard" component={protectedPage(Dashboard)} />
-          <Route path="/history" component={protectedPage(Index)} />
+          <Route path="/history" component={protectedPage(Home)} />
           <Route path="/recent" component={protectedPage(Table)} />
-          <Route path="/graph" component={protectedPage(Index)} />
+          <Route path="/search" component={protectedPage(Search)} />
+          <Route path="/graph" component={protectedPage(Home)} />
           <Route component={Page404} />
         </Switch>
       </div>

@@ -4,7 +4,7 @@ interface Props<T> {
   accessor: (data: T) => string[]
   id: (data: T) => string,
   cellClass?: (data: T) => string,
-  rowClass?: (data: T) => string
+  rowClass?: (data: T) => string,
 }
 
 const Table = <T extends unknown>({ data, headers, accessor, id, cellClass, rowClass }: Props<T>) => {

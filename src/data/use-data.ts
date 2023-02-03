@@ -2,14 +2,12 @@ import { APIData, dataAtom, userAtom } from "@/state/atoms"
 import { useAtom } from "jotai"
 import { toggleArmRequest } from "@/data/global"
 
+// Hook documentation at: https://beta.reactjs.org/learn/reusing-logic-with-custom-hooks
+
 function useData() {
   const [data, setData] = useAtom(dataAtom)
   const [user, _setUser] = useAtom(userAtom)
   
-  data.data?.hourlyTotals.sort((value1, value2) => {
-    return parseInt(value1.date.$date.$numberLong) - parseInt(value2.date.$date.$numberLong)
-  })
-
   const refresh = async () => {
     if (!user.token && !data.data) { return }
 

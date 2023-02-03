@@ -2,9 +2,7 @@ import Card from "@/components/card"
 import Button from "@/components/button"
 import useData from "@/data/use-data"
 
-import LineChart from "@/components/linechart"
-
-import Index from "@/pages/Index"
+import Home from "@/pages/Home"
 import EventTable from "@/pages/Table"
 
 const Dashboard = () => {
@@ -19,7 +17,7 @@ const Dashboard = () => {
         </div>
         <Button onClick={refresh}>Toggle</Button>
       </Card>
-      <Index />
+      <Home />
       <EventTable />
     </div>
   )

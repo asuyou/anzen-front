@@ -1,7 +1,9 @@
-import useData from "@/data/use-data"
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, Label } from 'recharts';
 
 import { useState, useMemo } from "react";
+import { HourlyTotal } from "@/data/types";
+
+// Documentation from: https://recharts.org/en-US/api
 
 type TempData = {
   [key: string]: {
@@ -16,14 +18,14 @@ type FormattedData = {
   unarmed: number
 }
 
-const Chart = () => {
-  let { data, isLoading } = useData()
+const Chart = ({info}: {info: HourlyTotal[]}) => {
+  if (!info) { return <></> }
+
   const [fmtData, setFmtData] = useState<FormattedData[]>([])
 
   useMemo(() => {
     let tempMap: TempData = {}
 
-    if (isLoading) { return }
 
     const getDT = (key: string) => {
       let date = new Date(parseInt(key))
@@ -31,8 +33,7 @@ const Chart = () => {
       return `${new Intl.DateTimeFormat('en-GB', { weekday: "long" }).format(date).slice(0, 3)} ${date.getHours()}:00`
     }
 
-    data?.hourlyTotals.forEach(element => {
-      // tempMap[element.date.$date.$numberLong] = null
+    info.forEach(element => {
       let pos = tempMap[element.date.$date.$numberLong]
 
       tempMap[element.date.$date.$numberLong] = {
@@ -41,14 +42,22 @@ const Chart = () => {
       }
     });
 
-    const newData = Object.entries(tempMap).map(([key, value]) => ({
+    const newData = Object.entries(tempMap)
+    .sort((a, b) => {
+      let larger = -1
+      if (parseInt(a[0]) > parseInt(b[0])) {
+        larger = 1
+      }
+      return larger
+    })
+    .map(([key, value]) => ({
       name: getDT(key),
       armed: value?.armed || 0,
       unarmed: value?.unarmed || 0
     }))
 
     setFmtData(newData)
-  }, [data])
+  }, [info])
 
   return (
   <ResponsiveContainer width="90%" height="70%" className="m-10">

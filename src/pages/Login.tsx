@@ -8,14 +8,14 @@ import { userAtom } from "@/state/atoms"
 const Login = () => {
   const [user, setUser] = useAtom(userAtom)
   const [error, setError] = useState("")
-  const [formName, setFormName] = useState("")
+  const [formEmail, setFormEmail] = useState("")
   const [formPWD, setFormPWD] = useState("")
 
   const handle_login = async (event: SubmitEvent) => {
     event.preventDefault()
 
     const loginReq = {
-      username: formName,
+      email: formEmail,
       password: formPWD
     }
 
@@ -25,7 +25,7 @@ const Login = () => {
     })
 
     setFormPWD("")
-    setFormName("")
+    setFormEmail("")
 
     const resp = await data.json()
 
@@ -44,9 +44,9 @@ const Login = () => {
         <input
           type="text"
           className="bg-slate-600 px-2 py-1 rounded"
-          value={formName}
-          placeholder="username"
-          onChange={(e) => setFormName(e.target.value)}
+          value={formEmail}
+          placeholder="email"
+          onChange={(e) => setFormEmail(e.target.value)}
         />
         <input
           type="password"

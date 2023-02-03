@@ -12,8 +12,9 @@ export const Routes: Route[] = [
   { name: "History", href: "/history", protect: true },
   { name: "Recent", href: "/recent", protect: true },
   { name: "Graph", href: "/graph", protect: true },
+  { name: "Search", href: "/search", protect: true },
   { name: "Login", href: "/login", protect: false, loggedOut: true },
-  { name: "Logout", href: "/logout", protect: true },
+  { name: "Account", href: "/account", protect: true },
   { name: "Register", href: "/register", protect: false, loggedOut: true },
 ]
 

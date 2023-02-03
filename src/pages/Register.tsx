@@ -7,13 +7,15 @@ const Register = () => {
   const [status, setStatus] = useState({ code: 0, error: "" })
   const [formName, setFormName] = useState("")
   const [formPWD, setFormPWD] = useState("")
+  const [formEmail, setFormEmail] = useState("")
 
   const handle_register = async (event: SubmitEvent) => {
     event.preventDefault()
 
     const registerReq = {
       username: formName,
-      password: formPWD
+      password: formPWD,
+      email: formEmail
     }
 
     let data = await fetch("http://127.0.0.1:8000/api/v1/auth/register", {
@@ -23,6 +25,7 @@ const Register = () => {
 
     setFormPWD("")
     setFormName("")
+    setFormEmail("")
 
     const resp = await data.json()
 
@@ -48,6 +51,13 @@ const Register = () => {
           value={formName}
           placeholder="username"
           onChange={(e) => setFormName(e.target.value)}
+        />
+        <input
+          type="text"
+          className="bg-slate-600 px-2 py-1 rounded"
+          value={formEmail}
+          placeholder="email"
+          onChange={(e) => setFormEmail(e.target.value)}
         />
         <input
           type="password"

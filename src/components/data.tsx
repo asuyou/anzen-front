@@ -5,7 +5,7 @@ import { useEffect } from "react"
 
 const DataFetching = (props: React.PropsWithChildren<any>) => {
   const [globalData, setData] = useAtom(dataAtom)
-  const [user, _setUser] = useAtom(userAtom)
+  const [user, setUser] = useAtom(userAtom)
 
   const fetch = async () => {
     if (!user.token) {return}

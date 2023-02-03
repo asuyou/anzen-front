@@ -2,6 +2,8 @@ import { atomWithStorage } from "jotai/utils"
 import { atom } from "jotai"
 import { CoreStaus, EventStats, HourlyTotal, Event, Command } from "@/data/types"
 
+// Documentation used: https://jotai.org/docs/introduction
+
 export type APIData = {
   ok: boolean,
   status: number,

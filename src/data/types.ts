@@ -68,8 +68,8 @@ export type Event = {
     name: string,
     device_type: string,
     data_type: string
-  }[],
-  plugin: Plugin[]
+  },
+  plugin: Plugin
 }
 
 export type Command = {
@@ -84,5 +84,15 @@ export type Command = {
     extra_data: string
   },
   data: string,
-  plugin: Plugin[]
+  plugin: Plugin
 }
+
+export type Search = {
+  start: string | undefined,
+  end: string | undefined,
+  armed: string | undefined,
+  device: string | undefined,
+  plugin: string | undefined
+}
+
+
