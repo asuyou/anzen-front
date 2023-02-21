@@ -33,7 +33,7 @@ const Logout = () => {
   const handlePasswordReset = async (event: SubmitEvent) => {
     event.preventDefault()
 
-    await execute(formPWD)
+    await execute({ password: formPWD })
     
     setFormPWD("")
 

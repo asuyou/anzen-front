@@ -68,11 +68,15 @@ export const fetchCurrentUser = async (token: string) => {
   return await handleResponse(data)
 }
 
-export const updatePassword = async (token: string, password: string) => {
+type passwordData = {
+  password: string
+}
+
+export const updatePassword = async (token: string, data: passwordData) => {
   const updateReq = {
-    password
+    password: data.password
   }
-  let data = await fetch("http://127.0.0.1:8000/api/v1/users/updatepassword", {
+  let newData = await fetch("http://127.0.0.1:8000/api/v1/users/updatepassword", {
     method: "POST",
     body: JSON.stringify(updateReq),
     headers: {
@@ -80,6 +84,28 @@ export const updatePassword = async (token: string, password: string) => {
     }
   })
 
-  return await handleResponse(data)
+  return await handleResponse(newData)
+}
+
+type emailData = {
+  email: string,
+  priority: number
+}
+
+export const addEmail = async (token: string, data: emailData) => {
+  const emailReq = {
+    email: data.email,
+    priority: data.priority
+  }
+
+  let newData = await fetch("http://127.0.0.1:8000/api/v1/corefuncs/", {
+    method: "POST",
+    body: JSON.stringify(emailReq),
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  return await handleResponse(newData)
 }
 

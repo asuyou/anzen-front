@@ -5,7 +5,7 @@ import { useState } from "react"
 
 // Hook documentation at: https://beta.reactjs.org/learn/reusing-logic-with-custom-hooks
 
-function useRequest<T>(endpoint: (token: string, ...values: [T]) => Promise<ValidatedResponse> ) {
+function useRequest<T>(endpoint: (token: string, data: T) => Promise<ValidatedResponse> ) {
   const [data, setData] = useState<any>({})
   const [user, _setUser] = useAtom(userAtom)
   
