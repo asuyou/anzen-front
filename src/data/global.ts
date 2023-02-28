@@ -98,7 +98,7 @@ export const addEmail = async (token: string, data: emailData) => {
     priority: data.priority
   }
 
-  let newData = await fetch("http://127.0.0.1:8000/api/v1/corefuncs/", {
+  let newData = await fetch("http://127.0.0.1:8000/api/v1/core/addmail", {
     method: "POST",
     body: JSON.stringify(emailReq),
     headers: {

@@ -1,3 +1,5 @@
+import { uid } from "uid"
+
 interface Props<T> {
   data: T[]
   headers: string[]
@@ -14,7 +16,7 @@ const Table = <T extends unknown>({ data, headers, accessor, id, cellClass, rowC
       <thead>
         <tr>
         {headers.map(heading => (
-          <th key={heading} className=" bg-slate-600 font-semibold p-2 uppercase text-slate-100">
+          <th key={heading} className="bg-slate-600 font-semibold p-2 uppercase text-slate-100">
             { heading }
           </th>
         ))}
@@ -24,7 +26,7 @@ const Table = <T extends unknown>({ data, headers, accessor, id, cellClass, rowC
         { data.map(row => (
           <tr key={id(row)} className={rowClass && rowClass(row)}>
             {accessor(row).map(value => (
-              <td key={value} className={cellClass && cellClass(row)}>
+              <td key={uid()} className={cellClass && cellClass(row)}>
                 {value}
               </td>
             ))}

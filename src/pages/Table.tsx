@@ -10,10 +10,10 @@ const EventTable = () => {
 
     const eventAccessor = (data: Event) => [
       new Date(parseInt(data.timestamp.$date.$numberLong)).toLocaleString(),
-      data.device.name,
-      data.plugin.name,
+      data.device?.name,
+      data.plugin?.name,
     ]
-
+    
     const commandAccessor = (data: Command) => [
       new Date(parseInt(data.timestamp.$date.$numberLong)).toLocaleString(),
       data.plugin.name,
